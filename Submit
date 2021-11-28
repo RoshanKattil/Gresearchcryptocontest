@@ -1,0 +1,19 @@
+env = gresearch_crypto.make_env()
+iter_test = env.iter_test()
+
+for i, (df_test, df_pred) in enumerate(iter_test):
+    for j , row in df_test.iterrows():
+        
+        if models[row['Asset_ID']] is not None:
+            try:
+                model = models[row['Asset_ID']]
+                x_test = get_features(row)
+                y_pred = model.predict(pd.DataFrame([x_test]))[0]
+                df_pred.loc[df_pred['row_id'] == row['row_id'], 'Target'] = y_pred
+            except:
+                df_pred.loc[df_pred['row_id'] == row['row_id'], 'Target'] = 0
+                traceback.print_exc()
+        else: 
+            df_pred.loc[df_pred['row_id'] == row['row_id'], 'Target'] = 0
+        
+    env.predict(df_pred)
