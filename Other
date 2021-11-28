@@ -1,0 +1,15 @@
+import traceback
+import numpy as np
+import pandas as pd
+import datatable as dt
+import gresearch_crypto
+from lightgbm import LGBMRegressor
+
+TRAIN_JAY = '../input/cryptocurrency-extra-data-binance-coin/orig_train.jay'
+ASSET_DETAILS_JAY = '../input/cryptocurrency-extra-data-binance-coin/orig_asset_details.jay'
+
+df_train = dt.fread('../input/cryptocurrency-extra-data-binance-coin/orig_train.jay').to_pandas()
+df_train.head()
+
+df_asset_details = dt.fread('../input/cryptocurrency-extra-data-binance-coin/orig_asset_details.jay').to_pandas().sort_values("Asset_ID")
+df_asset_details
