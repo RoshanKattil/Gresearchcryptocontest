@@ -18,7 +18,7 @@ def get_Xy_and_model_for_asset(df_train, asset_id):
         colsample_bytree=0.7,
         missing=-999,
         random_state=2020,
-        # tree_method='gpu_hist'  # THE MAGICAL PARAMETER
+        # tree_method='gpu_hist'
     )
     model.fit(X, y)
 
